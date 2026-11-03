@@ -61,31 +61,8 @@ check("[1,1,1,3,3,4,3,2,4,2] → true", containsDuplicate([1, 1, 1, 3, 3, 4, 3, 
 // pattern → key idea → time / space:
 function isAnagramSort(s, t) {
   // your code
-  let map = new Map();
-    if( s.length != t.length) return false
-
-
-    for( let i = 0 ; i < s.length ; i++ ){
-        if(map.has(s[i])){
-            map.set(s[i] , map.get(s[i])+1)
-        }else{
-            map.set(s[i],1)
-        }
-    }
-
-    for(let i = 0 ; i < t.length ; i++){
-        if(!map.has(t[i])){
-            return false
-        }else{
-            map.set(t[i], map.get(t[i]) -1)
-        }
-    }
-
-    for(let [key,value] of map){
-        if (value != 0) return false 
-    }
-    
-    return true
+ if (s.length != t.length) return false
+ return  s.split("").sort().join("") === t.split("").sort().join("");
 }
 
 // Version B: counting (one object or Map: +1 for s, -1 for t)
@@ -94,7 +71,6 @@ function isAnagramCount(s, t) {
   // your code
   let map = new Map();
     if( s.length != t.length) return false
-
 
     for( let i = 0 ; i < s.length ; i++ ){
         if(map.has(s[i])){
@@ -127,7 +103,7 @@ for (const [name, fn] of [["sort", isAnagramSort], ["count", isAnagramCount]]) {
   check(`${name}: "aacc","ccac" → false`, fn("aacc", "ccac"), false);
 }
 // Which version is faster, and when would an interviewer prefer the other one?
-// Your answer:
+// Your answer: The sort version is faster . when we can use in built sort function then it is better and if we are not allowed to use sort then we need to have the map approach
 
 // =====================================================================
 // Task 3 · Predict the output (types & coercion)
@@ -172,3 +148,4 @@ check('0.1 + 0.2 === 0.3', 0.1 + 0.2 === 0.3, false);
 // =====================================================================
 
 console.log(`\n${pass} passed · ${fail} to fix · ${todo} predictions not written yet`);
+
